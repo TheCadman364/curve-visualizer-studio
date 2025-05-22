@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 221.2 83% 53.3%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -30,25 +31,13 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 221.2 83% 53.3%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --hermite-color: 130, 77%, 48%;
+    --bezier-color: 221, 83%, 53%;  
+    --bspline-color: 288, 95%, 60%;
   }
 
   .dark {
@@ -61,7 +50,7 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -78,15 +67,7 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --ring: 224.3 76.3% 48%;
   }
 }
 
@@ -98,4 +79,94 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.canvas-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background-color: white;
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px), 
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.hermite-curve {
+  stroke: hsl(var(--hermite-color));
+  stroke-width: 2px;
+  fill: none;
+}
+
+.bezier-curve {
+  stroke: hsl(var(--bezier-color));
+  stroke-width: 2px;
+  fill: none;
+}
+
+.bspline-curve {
+  stroke: hsl(var(--bspline-color));
+  stroke-width: 2px;
+  fill: none;
+}
+
+.control-polygon {
+  stroke: rgba(0, 0, 0, 0.3);
+  stroke-width: 1px;
+  stroke-dasharray: 5,5;
+  fill: none;
+}
+
+.control-point {
+  cursor: move;
+}
+
+.control-point-hermite {
+  fill: hsl(var(--hermite-color));
+  stroke: white;
+  stroke-width: 2px;
+}
+
+.control-point-bezier {
+  fill: hsl(var(--bezier-color));
+  stroke: white;
+  stroke-width: 2px;
+}
+
+.control-point-bspline {
+  fill: hsl(var(--bspline-color));
+  stroke: white;
+  stroke-width: 2px;
+}
+
+.tangent-vector {
+  stroke: rgba(0, 0, 0, 0.5);
+  stroke-width: 2px;
+  fill: none;
+}
+
+.blending-function-plot {
+  height: 100px;
+  width: 100%;
+  margin-top: 1rem;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius);
+}
+
+.coefficient-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.coefficient-table th,
+.coefficient-table td {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.coefficient-table th {
+  background-color: var(--muted);
 }
